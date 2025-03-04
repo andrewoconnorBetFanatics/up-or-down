@@ -1,38 +1,47 @@
-.App {
-  text-align: center;
+.mainDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem; /* Equivalent to p-4 (16px) */
+    gap: 1rem;
+    background-color: black;
+    height: 100vh;      /* 100% of the viewport height */
+    width: 100vw;       /* 100% of the viewport width */
+    justify-content: center;  /* Center content horizontally */
 }
+.secondDiv {
+    display: flex;
+    gap: 1rem; /* Equivalent to space-x-4 (16px) */
+    background-color: #1a202c; /* Equivalent to bg-gray-900 */
+    padding: 1.5rem; /* Equivalent to p-6 (24px) */
+    border-radius: 0.5rem; /* Equivalent to rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+p{
+    color: white;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.header{
+    color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.motion {
+        text-align: center;
+        width: 6rem; /* Equivalent to w-24 (96px) */
+        height: 6rem; /* Equivalent to h-24 (96px) */
+        display: flex;
+        align-items: center; /* Equivalent to items-center */
+        justify-content: center; /* Equivalent to justify-center */
+        font-size: 2.25rem; /* Equivalent to text-4xl (36px) */
+        background-color: white; /* Equivalent to bg-white */
+        border-radius: 0.5rem; /* Equivalent to rounded-lg */
+        overflow: hidden; /* Equivalent to overflow-hidden */
+        padding: 0.5rem; /* Equivalent to p-2 (8px) */
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.other {
+    padding: 0.75rem 1.5rem; /* Equivalent to px-6 py-3 (24px horizontal, 12px vertical) */
+    background-color: darkred; /* Equivalent to bg-blue-500 */
+    color: white; /* Equivalent to text-white */
+    border-radius: 0.5rem; /* Equivalent to rounded-lg */
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); !* Equivalent to shadow-lg *!*/
+    font-size: 1.125rem; /* Equivalent to text-lg (18px) */
 }
