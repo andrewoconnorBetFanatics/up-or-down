@@ -11,6 +11,7 @@ const weather = ["It's miserable out", "Great stretch in the evening", "Could be
 const BoolV2 = ["True","False","Perhaps"][Math.floor(Math.random() * 3)]
 const cosmic =["Nik was Stopped", "Andrew is the Murderer", "The Big Appsecsy Determined"][Math.floor(Math.random() * 3)]
 const symbols = ["⬆️", "⬇️", "NO STAND UP"];
+const people = ["Andrew", "Arun", "Liam", "Nik", "Rafal", "Sneha", "Prashant", "John", "Vishal"]
 const steps = [
     "Consulting Oracle.....",
     `Determining Celestial Invocation...${result}`,
@@ -25,15 +26,18 @@ const steps = [
 
 export default function SlotMachine() {
   const [slots, setSlots] = useState(["⬆️", "⬇️", "NO STAND UP"]);
+  const [peopleSlots, setPeopleSlots] = useState([people[Math.floor(Math.random() * 9)],people[Math.floor(Math.random() * 9)],people[Math.floor(Math.random() * 9)]])
   const [text, setText] = useState("")
   const [spinning, setSpinning] = useState(false);
 
     useEffect(() => {
         if (spinning) {
-            const interval = setInterval(() => {
+            const interval1 = setInterval(() => {
                 setSlots(Array.from({ length: 3 }, () => symbols[Math.floor(Math.random() * symbols.length)]));
             }, 100);
-
+            const interval2 = setInterval(() => {
+                setPeopleSlots(Array.from({ length: 3 }, () => people[Math.floor(Math.random() * 9)]));
+            }, 105);
             let stepCounter = 0;
             const textInterval = setInterval(() => {
                 if (stepCounter < steps.length) {
@@ -46,22 +50,33 @@ export default function SlotMachine() {
 
             setTimeout(() => {
                 setSlots(Array.from({ length: 3 }, () => symbols[generateDay()]));
+                const person = selectPerson()
+                setPeopleSlots(Array.from({ length: 3 }, () => people[person]))
+                console.log(peopleSlots)
+                console.log(person)
                 setSpinning(false);
-                clearInterval(interval);
+                clearInterval(interval1);
+                clearInterval(interval2);
                 clearInterval(textInterval);
             }, 13400);
 
             return () => {
-                clearInterval(interval);
+                clearInterval(interval1);
+                clearInterval(interval2);
                 clearInterval(textInterval);
             };
         }
     }, [spinning]);
 
   return (
+
       <div className="mainDiv">
           <h1 className= "header">The Wheelie Oracle</h1>
           <h2 className="header">Spin To Stand-Up</h2>
+          <div className="candle-container">
+              <Candle />
+              <Candle />
+              <Candle />
         <div className="secondDiv">
           {slots.map((symbol, index) => (
               <motion.div
@@ -75,10 +90,30 @@ export default function SlotMachine() {
 
           ))}
 
+
         </div>
-          <div>
-              {}
+          <div className="secondDiv">
+              {peopleSlots.map((symbol, index) => (
+                  <motion.div
+                      key={index}
+                      className="motion"
+                      animate={{ opacity: [0.5, 1], scale: [0.8, 1] }}
+                      transition={{ duration: 0.1, repeat: spinning ? Infinity : 0 }}
+
+                  >
+                      <div className="name">{symbol}</div>
+                  </motion.div>
+              ))}
           </div>
+
+          <div>
+
+          </div>
+              <Candle />
+              <Candle />
+              <Candle />
+          </div>
+
         <button
             onClick={() => {
                 setSpinning(true)
@@ -117,6 +152,10 @@ export default function SlotMachine() {
         return (day === 2) || (day === 4)
     }
 
+    function selectPerson(){
+        return Math.floor(Math.random() * 9)
+    }
+
 
 
 var sound = new Howl({
@@ -128,4 +167,18 @@ async function Audio() {
             sound.play();
         }, i * 2700);
     }
+}
+
+function Candle() {
+    return (
+        <div className="candle">
+            <motion.div
+                className="flame"
+                animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.1, 1] }}
+                transition={{ duration: 0.5, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <div className="wick" />
+            <div className="candle-body" />
+        </div>
+    );
 }
